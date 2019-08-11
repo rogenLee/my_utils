@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crb.model.mapper.TPointupMapper">
+  <resultMap id="BaseResultMap" type="com.crb.model.TPointup">
+    <id column="pointup_id" jdbcType="INTEGER" property="pointupId" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+    <result column="pointup_type" jdbcType="VARCHAR" property="pointupType" />
+    <result column="comment_user_id" jdbcType="BIGINT" property="commentUserId" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    "pointup_id", "article_id", "article_type", "pointup_type", "comment_user_id", "comment_time"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_pointup
+    where "pointup_id" = #{pointupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_pointup
+    where "pointup_id" = #{pointupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crb.model.TPointup">
+    insert into t_pointup ("pointup_id", "article_id", "article_type", 
+      "pointup_type", "comment_user_id", "comment_time"
+      )
+    values (#{pointupId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{articleType,jdbcType=VARCHAR}, 
+      #{pointupType,jdbcType=VARCHAR}, #{commentUserId,jdbcType=BIGINT}, #{commentTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crb.model.TPointup">
+    insert into t_pointup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pointupId != null">
+        "pointup_id",
+      </if>
+      <if test="articleId != null">
+        "article_id",
+      </if>
+      <if test="articleType != null">
+        "article_type",
+      </if>
+      <if test="pointupType != null">
+        "pointup_type",
+      </if>
+      <if test="commentUserId != null">
+        "comment_user_id",
+      </if>
+      <if test="commentTime != null">
+        "comment_time",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pointupId != null">
+        #{pointupId,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleType != null">
+        #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="pointupType != null">
+        #{pointupType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUserId != null">
+        #{commentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crb.model.TPointup">
+    update t_pointup
+    <set>
+      <if test="articleId != null">
+        "article_id" = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleType != null">
+        "article_type" = #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="pointupType != null">
+        "pointup_type" = #{pointupType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUserId != null">
+        "comment_user_id" = #{commentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="commentTime != null">
+        "comment_time" = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where "pointup_id" = #{pointupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crb.model.TPointup">
+    update t_pointup
+    set "article_id" = #{articleId,jdbcType=INTEGER},
+      "article_type" = #{articleType,jdbcType=VARCHAR},
+      "pointup_type" = #{pointupType,jdbcType=VARCHAR},
+      "comment_user_id" = #{commentUserId,jdbcType=BIGINT},
+      "comment_time" = #{commentTime,jdbcType=TIMESTAMP}
+    where "pointup_id" = #{pointupId,jdbcType=INTEGER}
+  </update>
+</mapper>
